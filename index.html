@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CFUTURE.DEV – Backend engineering for payments and critical systems</title>
+<meta name="description" content="Independent backend engineering and technical leadership by Julio Castro. Java and Spring Boot, event-driven microservices, payments and financial systems. Based in Lisbon.">
+<meta property="og:title" content="CFUTURE.DEV">
+<meta property="og:description" content="Independent backend engineering and technical leadership for payments, banking and public infrastructure.">
+<meta property="og:url" content="https://www.cfuture.dev">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#FFFFFF; --ink:#0A192F; --muted:#4F5D75; --line:#E2E7EF; --accent:#00C853; --soft:#F3F6FA;
+}
+@media (prefers-color-scheme:dark){
+  :root{color-scheme:dark; --bg:#0A192F; --ink:#FFFFFF; --muted:#A9B5C9; --line:#1D2C47; --accent:#00C853; --soft:#0F2240;}
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:Inter,'Space Grotesk',Arial,sans-serif;font-size:1.0625rem;line-height:1.6;}
+a{color:inherit}
+a:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+.wrap{max-width:66rem;margin:0 auto;padding:0 1.5rem}
+
+header{padding:1.75rem 0}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{display:block;width:11.5rem;height:auto}
+.logo .t1,.logo .node{fill:var(--ink)}
+.logo .t2{fill:var(--accent)}
+.logo .edge{stroke:var(--accent)}
+header nav a{font-weight:500;text-decoration:none;font-size:.95rem}
+header nav a:hover{text-decoration:underline;text-underline-offset:4px}
+
+.hero{padding:4.5rem 0 6rem}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:3rem;align-items:center}
+h1{font-weight:900;font-size:clamp(2.6rem,6.4vw,4.75rem);line-height:1.02;letter-spacing:-.045em;max-width:12ch}
+.lede{margin-top:1.75rem;max-width:36rem;font-size:1.2rem;color:var(--muted)}
+.actions{margin-top:2.25rem;display:flex;flex-wrap:wrap;gap:.75rem}
+.btn{display:inline-block;padding:.85rem 1.4rem;border-radius:6px;font-weight:700;text-decoration:none;font-size:1rem;border:2px solid var(--ink)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn.primary:hover{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--soft)}
+
+.mark{width:100%;max-width:22rem;justify-self:end;overflow:visible}
+.mark .edge{fill:none;stroke:var(--accent);stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+.mark .node{fill:var(--ink)}
+@media (prefers-reduced-motion:no-preference){
+  .mark .edge{stroke-dasharray:44;stroke-dashoffset:44;animation:draw .45s ease-out forwards}
+  .mark .e1{animation-delay:.35s}.mark .e2{animation-delay:.8s}.mark .e3{animation-delay:.8s}
+  .mark .node{transform-box:fill-box;transform-origin:center;transform:scale(0);animation:pop .3s cubic-bezier(.3,1.6,.6,1) forwards}
+  .mark .n1{animation-delay:.1s}.mark .n2{animation-delay:.75s}.mark .n3{animation-delay:1.2s}.mark .n4{animation-delay:1.2s}
+}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{to{transform:scale(1)}}
+
+section{padding:4.5rem 0;border-top:1px solid var(--line)}
+h2{font-weight:900;font-size:clamp(1.7rem,3.2vw,2.3rem);letter-spacing:-.03em;line-height:1.15;margin-bottom:2.5rem}
+.services{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2.5rem 3.5rem}
+.services dt{font-weight:700;font-size:1.15rem;margin-bottom:.4rem;padding-left:1rem;border-left:4px solid var(--accent)}
+.services dd{color:var(--muted);max-width:30rem;padding-left:1.25rem}
+
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:3.5rem}
+.split h2{margin-bottom:1.25rem}
+.split p{color:var(--muted);max-width:32rem}
+.split p+p{margin-top:1rem}
+.sectors{list-style:none}
+.sectors li{padding:.7rem 0;border-bottom:1px solid var(--line);font-weight:500}
+.sectors li:first-child{border-top:1px solid var(--line)}
+
+.contact{background:var(--soft);border-top:0}
+.contact p{color:var(--muted);max-width:34rem;margin-bottom:2rem}
+.mail{font-weight:900;font-size:clamp(1.6rem,4.5vw,3rem);letter-spacing:-.03em;text-decoration:none;border-bottom:4px solid var(--accent);word-break:break-word}
+.mail:hover{border-bottom-width:6px}
+.contact .actions{margin-top:2.5rem}
+
+footer{padding:2.25rem 0 3rem;font-size:.875rem;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 2rem}
+
+@media (max-width:760px){
+  .hero{padding:2.5rem 0 4rem}
+  .hero .wrap{grid-template-columns:1fr;gap:2.5rem}
+  .mark{order:-1;justify-self:start;max-width:7rem}
+  .services,.split{grid-template-columns:1fr}
+  .services{gap:2rem}
+  section{padding:3.5rem 0}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="/" aria-label="CFUTURE.DEV home">
+      <svg class="logo" viewBox="0 0 415 120" role="img" aria-label="CFUTURE.DEV">
+        <g class="edge" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M40 30 L70 60 L40 90 M70 60 L100 30"/></g>
+        <g class="node"><circle cx="40" cy="30" r="8"/><circle cx="40" cy="90" r="8"/><circle cx="70" cy="60" r="8"/><circle cx="100" cy="30" r="8"/></g>
+        <path class="t1" d="M139.62109375 74.1943359375Q135.8359375 74.1943359375 132.82080078125 72.5615234375Q129.8056640625 70.9287109375 128.05224609375 67.76513671875Q126.298828125 64.6015625 126.298828125 60.0185546875Q126.298828125 55.3984375 128.080078125 52.2255859375Q129.861328125 49.052734375 132.8857421875 47.42919921875Q135.91015625 45.8056640625 139.62109375 45.8056640625Q143.072265625 45.8056640625 145.77197265625 47.0302734375Q148.4716796875 48.2548828125 150.15087890625 50.5927734375Q151.830078125 52.9306640625 152.1640625 56.2705078125H144.556640625Q144.333984375 54.5078125 143.13720703125 53.42236328125Q141.9404296875 52.3369140625 139.84375 52.3369140625Q137.0234375 52.3369140625 135.5205078125 54.36865234375Q134.017578125 56.400390625 134.017578125 60.0185546875Q134.017578125 63.822265625 135.5390625 65.74267578125Q137.060546875 67.6630859375 139.806640625 67.6630859375Q141.8662109375 67.6630859375 143.0908203125 66.57763671875Q144.3154296875 65.4921875 144.59375 63.7294921875H152.201171875Q152.0712890625 65.4921875 151.22705078125 67.3291015625Q150.3828125 69.166015625 148.81494140625 70.724609375Q147.2470703125 72.283203125 144.95556640625 73.23876953125Q142.6640625 74.1943359375 139.62109375 74.1943359375Z M153.6884765625 73.8232421875V46.1767578125H173.1337890625V52.2255859375H161.1845703125V58.4599609375H171.9462890625V64.3603515625H161.1845703125V73.8232421875Z M186.2919921875 74.1572265625Q182.7294921875 74.1572265625 180.04833984375 72.90478515625Q177.3671875 71.65234375 175.87353515625 69.34228515625Q174.3798828125 67.0322265625 174.3798828125 63.8779296875V46.1767578125H181.8759765625V63.2470703125Q181.8759765625 65.1767578125 183.12841796875 66.419921875Q184.380859375 67.6630859375 186.2919921875 67.6630859375Q188.240234375 67.6630859375 189.49267578125 66.419921875Q190.7451171875 65.1767578125 190.7451171875 63.2470703125V46.1767578125H198.2412109375V63.8779296875Q198.2412109375 67.0322265625 196.73828125 69.34228515625Q195.2353515625 71.65234375 192.544921875 72.90478515625Q189.8544921875 74.1572265625 186.2919921875 74.1572265625Z M199.5615234375 52.2255859375V46.1767578125H223.5712890625V52.2255859375H215.314453125V73.8232421875H207.818359375V52.2255859375Z M236.8037109375 74.1572265625Q233.2412109375 74.1572265625 230.56005859375 72.90478515625Q227.87890625 71.65234375 226.38525390625 69.34228515625Q224.8916015625 67.0322265625 224.8916015625 63.8779296875V46.1767578125H232.3876953125V63.2470703125Q232.3876953125 65.1767578125 233.64013671875 66.419921875Q234.892578125 67.6630859375 236.8037109375 67.6630859375Q238.751953125 67.6630859375 240.00439453125 66.419921875Q241.2568359375 65.1767578125 241.2568359375 63.2470703125V46.1767578125H248.7529296875V63.8779296875Q248.7529296875 67.0322265625 247.25 69.34228515625Q245.7470703125 71.65234375 243.056640625 72.90478515625Q240.3662109375 74.1572265625 236.8037109375 74.1572265625Z M250.8154296875 73.8232421875V46.1767578125H262.7275390625Q265.8076171875 46.1767578125 268.11767578125 47.29931640625Q270.427734375 48.421875 271.71728515625 50.52783203125Q273.0068359375 52.6337890625 273.0068359375 55.5654296875Q273.0068359375 58.44140625 271.75439453125 60.4453125Q270.501953125 62.44921875 268.2939453125 63.5068359375L273.9345703125 73.8232421875H265.7705078125L260.9091796875 64.6943359375H258.3115234375V73.8232421875ZM258.3115234375 58.8681640625H260.9462890625Q262.931640625 58.8681640625 264.05419921875 58.107421875Q265.1767578125 57.3466796875 265.1767578125 55.5654296875Q265.1767578125 53.802734375 264.05419921875 52.99560546875Q262.931640625 52.1884765625 260.9462890625 52.1884765625H258.3115234375Z M274.6982421875 73.8232421875V46.1767578125H294.6259765625V52.2255859375H282.1943359375V56.9013671875H293.5869140625V62.8017578125H282.1943359375V67.7744140625H294.5517578125V73.8232421875Z"/><path class="t2" d="M301.791015625 74.2685546875Q300.158203125 74.2685546875 299.0634765625 73.1923828125Q297.96875 72.1162109375 297.96875 70.501953125Q297.96875 68.8876953125 299.0634765625 67.8115234375Q300.158203125 66.7353515625 301.791015625 66.7353515625Q303.423828125 66.7353515625 304.5185546875 67.8115234375Q305.61328125 68.8876953125 305.61328125 70.501953125Q305.61328125 72.1162109375 304.5185546875 73.1923828125Q303.423828125 74.2685546875 301.791015625 74.2685546875Z M319.810546875 73.8232421875H309.16015625V46.1767578125H319.69921875Q323.966796875 46.1767578125 327.0654296875 47.83740234375Q330.1640625 49.498046875 331.8525390625 52.5966796875Q333.541015625 55.6953125 333.541015625 60.0185546875Q333.541015625 64.3232421875 331.86181640625 67.421875Q330.1826171875 70.5205078125 327.1025390625 72.171875Q324.0224609375 73.8232421875 319.810546875 73.8232421875ZM316.65625 67.4404296875H319.513671875Q321.5732421875 67.4404296875 323.02978515625 66.791015625Q324.486328125 66.1416015625 325.2470703125 64.51806640625Q326.0078125 62.89453125 326.0078125 60.0185546875Q326.0078125 57.1240234375 325.228515625 55.50048828125Q324.44921875 53.876953125 322.95556640625 53.21826171875Q321.4619140625 52.5595703125 319.291015625 52.5595703125H316.65625Z M335.12109375 73.8232421875V46.1767578125H355.048828125V52.2255859375H342.6171875V56.9013671875H354.009765625V62.8017578125H342.6171875V67.7744140625H354.974609375V73.8232421875Z M365.2568359375 73.8232421875 355.9794921875 46.1767578125H364.4775390625L367.6875 56.9013671875Q368.466796875 59.4990234375 369.134765625 62.14306640625Q369.802734375 64.787109375 370.43359375 67.49609375Q371.0087890625 64.787109375 371.64892578125 62.14306640625Q372.2890625 59.4990234375 373.03125 56.9013671875L376.0927734375 46.1767578125H384.4794921875L375.4990234375 73.8232421875Z"/>
+      </svg>
+    </a>
+    <nav><a href="#contact">Contact</a></nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Backend systems that can’t afford to stop.</h1>
+        <p class="lede">CFUTURE.DEV is the independent engineering practice of Julio Castro. For over 20 years I’ve built and led Java backends for payments, banking and public infrastructure, where downtime means money or people stop moving.</p>
+        <div class="actions">
+          <a class="btn primary" href="mailto:hello@cfuture.dev">Email me</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/castrojulio" target="_blank" rel="noopener">View LinkedIn profile</a>
+        </div>
+      </div>
+      <svg class="mark" viewBox="20 10 100 100" aria-hidden="true">
+        <path class="edge e1" d="M40 30 L70 60"/>
+        <path class="edge e2" d="M70 60 L40 90"/>
+        <path class="edge e3" d="M70 60 L100 30"/>
+        <circle class="node n1" cx="40" cy="30" r="10"/>
+        <circle class="node n2" cx="70" cy="60" r="10"/>
+        <circle class="node n3" cx="40" cy="90" r="10"/>
+        <circle class="node n4" cx="100" cy="30" r="10"/>
+      </svg>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2>What I do</h2>
+      <dl class="services">
+        <div><dt>Technical leadership</dt><dd>Architecture decisions, API contracts and governance, technical documentation, and guiding development teams from design to production.</dd></div>
+        <div><dt>Payments and financial systems</dt><dd>Instant payments and ISO 20022 flows, payment state machines and SAGA-based orchestration for regulated environments.</dd></div>
+        <div><dt>Event-driven microservices</dt><dd>Spring Boot services built for 24/7 operation, with Kafka, Apache Pulsar, Solace and JMS messaging.</dd></div>
+        <div><dt>Legacy modernization</dt><dd>Moving SOA and monolithic services to Spring Boot 3 and Java 21, keeping business logic identical while the platform changes underneath.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split">
+      <div>
+        <h2>Where I’ve worked</h2>
+        <p>Banks, payment processors, public transport operators and engineering companies in Portugal, Brazil and the United States. Client names stay confidential, but references are available on request.</p>
+      </div>
+      <ul class="sectors">
+        <li>Payments and banking infrastructure</li>
+        <li>Consumer finance</li>
+        <li>Public transportation</li>
+        <li>Mobility and tolling</li>
+        <li>Aerospace and defense</li>
+        <li>Telecommunications and e-commerce</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split">
+      <div>
+        <h2>Working together</h2>
+        <p>I work B2B through my company, Clearfuture, Lda., on fixed-term or ongoing engagements, either directly or through your preferred consultancy partner.</p>
+      </div>
+      <div>
+        <p>Based in Lisbon. Available on-site, hybrid or fully remote within the EU.</p>
+        <p>Working languages: Portuguese and English.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <h2>Have a project in mind?</h2>
+      <p>Tell me what you’re building and when you need someone. I usually reply within one working day.</p>
+      <a class="mail" href="mailto:hello@cfuture.dev">hello@cfuture.dev</a>
+      <div class="actions">
+        <a class="btn ghost" href="https://www.linkedin.com/in/castrojulio" target="_blank" rel="noopener">Connect on LinkedIn</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>CFUTURE.DEV is a brand of Clearfuture, Lda., Lisbon, Portugal.</span>
+    <span>© 2026 Clearfuture, Lda.</span>
+  </div>
+</footer>
+
+</body>
+</html>
